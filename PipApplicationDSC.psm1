@@ -56,13 +56,13 @@ class PipApplicationDSC {
                 }
         
                 $targetFolder = Join-Path -Path $this.Path -ChildPath "$($this.ApplicationName)-$($this.Version)"
-                if (-not (Test-Path  -Path $targetFolder)){
+                if (-not (Test-Path -Path $targetFolder)){
                     Write-Verbose "$targetFolder not found"
                     return $false
                 }
         
                 $executableFile = Join-Path -Path $targetFolder -ChildPath $this.ExePath
-                if (-not (Test-Path  -Path $executableFile)){
+                if (-not (Test-Path -Path $executableFile)){
                     Write-Verbose "$executableFile not found"
                     return $false
                 }
@@ -94,7 +94,7 @@ class PipApplicationDSC {
                 }
             
                 $targetFolder = Join-Path -Path $this.Path -ChildPath "$($this.ApplicationName)-$($this.Version)"
-                if (Test-Path  -Path $targetFolder){
+                if (Test-Path -Path $targetFolder){
                     Remove-Item -Recurse -Force -Confirm:$false -Path $targetFolder -ErrorAction Stop
                 }
             
@@ -111,7 +111,7 @@ class PipApplicationDSC {
                          "$($this.LogPath)\$($this.ApplicatioNName)-$($this.Version).log"
                     )
                 
-                    Start-Process -FilePath $virtualEnvPip -ArgumentList ($argumentList -join ' ') -ErrorAction Stop
+                    Start-Process -FilePath $virtualEnvPip -ArgumentList $argumentList -ErrorAction Stop
                 }
                 else {
                     throw "virtualenv creation failed. Pip.exe could not be found on path $targetFolder\Scripts\pip.exe"
